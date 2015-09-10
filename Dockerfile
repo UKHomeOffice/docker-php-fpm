@@ -14,8 +14,8 @@ RUN yum update -y && \
       php-pecl-zendopcache && \
     yum -y clean all
 
-# Copy the PHP config files into etc
-COPY conf/* /etc/
+# Pass the php-fpm error log to stdout
+RUN ln -sf /dev/stdout /var/log/php-fpm.log
 
 # COPY & RUN startup script
 COPY start.sh /
