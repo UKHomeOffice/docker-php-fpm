@@ -17,6 +17,9 @@ RUN yum update -y && \
 # Pass the php-fpm error log to stdout
 RUN ln -sf /dev/stdout /var/log/php-fpm.log
 
+# This is what PHP-FPM listens on.
+EXPOSE 9000
+
 # COPY & RUN startup script
 COPY start.sh /
 CMD /start.sh
