@@ -1,6 +1,6 @@
 FROM quay.io/ukhomeofficedigital/docker-centos-base
 
-ENV PHPINI_SETTINGS "cgi.fix_pathinfo=0;"
+ENV PHPINI_SETTINGS "cgi.fix_pathinfo=1;"
 
 # Install PHP-FPM and libs
 RUN yum update -y && \
