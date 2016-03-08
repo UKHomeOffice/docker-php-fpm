@@ -1,22 +1,19 @@
-FROM quay.io/ukhomeofficedigital/docker-centos-base
+FROM quay.io/ukhomeofficedigital/centos-base
 
-ENV PHPINI_SETTINGS "cgi.fix_pathinfo=0;"
+# Pass the php-fpm error log to stdout
+RUN ln -sf /dev/stdout /var/log/php-fpm.log
 
 # Install PHP-FPM and libs
-RUN yum update -y && \
-    yum install -y  \
+RUN yum install -y  \
       php-fpm \
       php-mbstring \
       php-mysql  \
       php-gd \
       php-xml \
       php-intl \
-      php-pecl-zendopcache && \
-    yum -y clean all
+      php-pecl-zendopcache \
+      php-cli && \
+    yum -y clean all && \
 
-# Pass the php-fpm error log to stdout
-RUN ln -sf /dev/stdout /var/log/php-fpm.log
-
-# COPY & RUN startup script
-COPY start.sh /
-CMD /start.sh
+# Pass default CMD
+CMD ["/usr/sbin/php-fpm", "--nodaemonize", "-d", "cgi.fix_pathinfo=0;"]
