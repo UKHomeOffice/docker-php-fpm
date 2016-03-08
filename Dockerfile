@@ -13,7 +13,8 @@ RUN yum install -y  \
       php-intl \
       php-pecl-zendopcache \
       php-cli && \
-    yum -y clean all 
+    yum -y clean all && \
+    sed -e 's/listen = 127.0.0.1:9000/listen = /var/run/php-fpm/php-fpm.socket' -i /etc/php-fpm.d/www.conf
 
 # Pass default CMD
 CMD ["/usr/sbin/php-fpm", "--nodaemonize", "-d", "cgi.fix_pathinfo=0;"]
