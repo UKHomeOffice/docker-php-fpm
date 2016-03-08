@@ -13,7 +13,7 @@ RUN yum install -y  \
       php-intl \
       php-pecl-zendopcache \
       php-cli && \
-    yum -y clean all && \
+    yum -y clean all 
 
 # Pass default CMD
 CMD ["/usr/sbin/php-fpm", "--nodaemonize", "-d", "cgi.fix_pathinfo=0;"]
