@@ -2,6 +2,7 @@ FROM quay.io/ukhomeofficedigital/centos-base
 
 # Pass the php-fpm error log to stdout
 RUN ln -sf /dev/stderr /var/log/php-fpm.log && \
+    mkdir -p /var/log/php-fpm && \
     ln -sf /dev/stderr /var/log/php-fpm/www-error.log && \
     ln -sf /dev/stderr /var/log/php-fpm/error.log && \
     ln -sf /dev/stderr /var/log/php-fpm/www-slow.log && \
